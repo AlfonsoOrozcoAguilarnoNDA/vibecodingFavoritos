@@ -13,7 +13,7 @@ He elegido la **Licencia MIT** por su simplicidad. Es lo más cercano a una "Cre
 ## ✍️ Acerca del Autor
 Este proyecto forma parte de una serie de artículos en **[vibecodingmexico.com](https://vibecodingmexico.com)**. Mi enfoque no es la programación de laboratorio, sino la **Programación Real**: aquella que sobrevive a servidores compartidos, bloqueos de oficina y conexiones de una sola rayita de señal.
 
-Mi nombre es Alfonso Orozco Aguilar, soy mexicano, programo desde 1991 para comer, y no tengo cuenta de Linkedin paradisminuir superficie de ataque. Llevo trabajando desde que tengo memoria con devops, y en 2026 estoy por terminar la licenciatura de contaduria. En el sitio esta mi perfil de facebook.
+Mi nombre es Alfonso Orozco Aguilar, soy mexicano, programo desde 1991 para comer, y no tengo cuenta de Linkedin para disminuir superficie de ataque. Llevo trabajando desde que tengo memoria como devops / programador senior, y en 2026 estoy por terminar la licenciatura de contaduria. En el sitio esta mi perfil de facebook.
 
 [Perfil de Facebook de Alfonso Orozco Aguilar](https://www.facebook.com/alfonso.orozcoaguilar)
 

@@ -27,7 +27,7 @@ Elegimos **cPanel** porque es el estándar de la industria desde hace 25 años y
 
 * **`config-sample.php`**: El molde de seguridad. Define la lista blanca de IPs y la conexión centralizada.
 * **`database.sql`**: Script SQL con `DROP TABLE IF EXISTS` para crear la estructura en un clic.
-* **`favoritoshumano.php`**: (620 líneas + licencia) La versión curada por el editor. Incluye control de caché, resiliencia de red y diseño Metro real. Basada en una respuesta de Gemini de hace 6 meses, pulida por experiencia humana.
+* **`favoritoshumano.php`**: (620 líneas + licencia) La versión curada por el editor. Incluye control de caché, resiliencia de red y diseño Metro real. Basada en una respuesta de Copilot (imagen) y modificada por Gemini de hace 6 meses, pulida por experiencia humana.
 * **`favoritosgemini.php`**: El equilibrio. Metódico, no ambicioso y el más fiel al archivo de configuración.
 * **`favoritosclaude.php`**: El "Búnker". 900+ líneas de sobreingeniería. Impresionante visualmente pero con desobediencia funcional (no funciona el CRUD de categorías).
 * **`favoritosgrok.php`**: El genio rebelde. Inestable al inicio (Error 500), pero impresionante en estética Metro tras el regaño.

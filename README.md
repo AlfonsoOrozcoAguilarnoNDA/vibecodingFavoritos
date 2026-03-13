@@ -10,7 +10,7 @@ He elegido la **Licencia MIT** por su simplicidad. Es lo más cercano a una "Cre
 
 * **¿Por qué no LGPL 2.1?** Aunque es una gran licencia para proteger mejoras (obligando a compartir los cambios del archivo), para este experimento buscaba la mínima fricción posible. La MIT es "Plug & Play", igual que la filosofía del proyecto.
 
-  Pero uno de losarchivos, el de minimax, si está bajo LGPL en un repositorio llamdo LEMkotir
+  Pero uno de los archivos, el de minimax, si está bajo LGPL en un repositorio llamdo LEMkotir
   https://github.com/AlfonsoOrozcoAguilarnoNDA/lemkotir/blob/main/favoritos.php
 
 ## ✍️ Acerca del Autor
@@ -35,6 +35,7 @@ Elegimos **cPanel** porque es el estándar de la industria desde hace 25 años y
 * **`favoritosclaude.php`**: El "Búnker". 900+ líneas de sobreingeniería. Impresionante visualmente pero con desobediencia funcional (no funciona el CRUD de categorías).
 * **`favoritosgrok.php`**: El genio rebelde. Inestable al inicio (Error 500), pero impresionante en estética Metro tras el regaño.
 * **`favoritoscopilot_v1.php`** / **`_v2.php`**: El becario. Códigos truncados por límites de tokens. Inútiles para despliegue directo.
+* **`favoritosminimax.php`**: FUncional, con categorias colapsables y apariencia excelente. El mejor de los LLM
 
 ---
 
@@ -63,6 +64,8 @@ Nota. A propósito no usé bootstrap 4.6 pero por lo general lo especifico.
 
 ## 🖼️ Evidencia Visual
 Las imágenes de las interfaces generadas se encuentran en la carpeta del repositorio para su consulta. Verás la diferencia entre el "Bootstrap genérico" de la IA y el "Mosaico Sólido" del diseño humano.
+
+Revisa el de Minimax, es sorprendente.
 
 ## 🚀 Requisitos Mínimos
 1. Un dominio y hospedaje php 7.x Hospedaje compartido con PHP 7.x o superior y acceso a MySQL/MariaDB.

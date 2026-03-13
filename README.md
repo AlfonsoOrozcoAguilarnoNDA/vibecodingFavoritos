@@ -10,6 +10,9 @@ He elegido la **Licencia MIT** por su simplicidad. Es lo más cercano a una "Cre
 
 * **¿Por qué no LGPL 2.1?** Aunque es una gran licencia para proteger mejoras (obligando a compartir los cambios del archivo), para este experimento buscaba la mínima fricción posible. La MIT es "Plug & Play", igual que la filosofía del proyecto.
 
+  Pero uno de losarchivos, el de minimax, si está bajo LGPL en un repositorio llamdo LEMkotir
+  https://github.com/AlfonsoOrozcoAguilarnoNDA/lemkotir/blob/main/favoritos.php
+
 ## ✍️ Acerca del Autor
 Este proyecto forma parte de una serie de artículos en **[vibecodingmexico.com](https://vibecodingmexico.com)**. Mi enfoque no es la programación de laboratorio, sino la **Programación Real**: aquella que sobrevive a servidores compartidos, bloqueos de oficina y conexiones de una sola rayita de señal.
 

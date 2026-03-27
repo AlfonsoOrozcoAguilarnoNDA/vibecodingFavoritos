@@ -1,4 +1,3 @@
-<?php
 include 'config.php';
 
 // 1. SEGURIDAD: IP + CONTRASEÑA HARDCODED
@@ -16,7 +15,7 @@ if (!in_array($client_ip, $allowed_ips)) {
         }
     }
     if (!isset($_SESSION['auth_user'])) {
-        die('<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"><title>Acceso Gotham</title></head><body class="bg-dark text-white d-flex align-items-center vh-100"><div class="container text-center" style="max-width:400px;"><h3><i class="fas fa-lock"></i> IP No Autorizada</h3><p class="small text-secondary">IP: '.$client_ip.'</p><form method="POST"><input type="password" name="login_pass" class="form-control mb-3" placeholder="Ingresa la clave hardcoded" required><button class="btn btn-primary w-100">Entrar</button></form>'.(isset($error_auth)?'<p class="text-danger mt-2">'.$error_auth.'</p>':'').'</div></body></html>');
+        die('<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet"><title>Acceso Gotham</title></head><body class="bg-dark text-white d-flex align-items-center vh-100"><div class="container text-center" style="max-width:400px;"><h3><i class="fas fa-lock"></i> IP No Autorizada</h3><p class="small text-secondary">IP: '.$client_ip.'</p><form method="POST"><input type="password" name="login_pass" class="form-control mb-3" placeholder="Ingresa la clave hardcoded" required><button class="btn btn-primary w-100">Entrar</button></form>'.(isset($error_auth)?'<p class="text-danger mt-2">'.$error_auth.'</p>':'').'</div></body></html>');
     }
 }
 
@@ -29,6 +28,8 @@ if (isset($_GET['logout'])) {
 
 // 3. CRUD (PROCEDURAL)
 // --- ALTAS ---
+$local="favoritosgemini.php";
+$local = basename(__FILE__); 
 if (isset($_POST['save_cat'])) {
     $name = mysqli_real_escape_string($link, $_POST['category_name']);
     $icon = mysqli_real_escape_string($link, $_POST['category_icon']);
@@ -38,7 +39,7 @@ if (isset($_POST['save_cat'])) {
     } else {
         mysqli_query($link, "INSERT INTO LINK_CATEGORIES (category_name, category_icon, category_color) VALUES ('$name', '$icon', '$color')");
     }
-    header("Location: index.php");
+    header("Location: $local");
 }
 
 if (isset($_POST['save_link'])) {
@@ -50,12 +51,16 @@ if (isset($_POST['save_link'])) {
     } else {
         mysqli_query($link, "INSERT INTO LINKS (category_id, link_title, link_url) VALUES ($cid, '$tit', '$url')");
     }
-    header("Location: index.php");
+    header("Location: $local");
 }
 
 // --- BAJAS ---
-if (isset($_GET['del_cat'])) { mysqli_query($link, "DELETE FROM LINK_CATEGORIES WHERE category_id=".(int)$_GET['del_cat']); header("Location: index.php"); }
-if (isset($_GET['del_link'])) { mysqli_query($link, "DELETE FROM LINKS WHERE link_id=".(int)$_GET['del_link']); header("Location: index.php"); }
+if (isset($_GET['del_cat'])) { mysqli_query($link, "DELETE FROM LINK_CATEGORIES WHERE category_id=".(int)$_GET['del_cat']); 
+header("Location: $local");
+ }
+if (isset($_GET['del_link'])) { mysqli_query($link, "DELETE FROM LINKS WHERE link_id=".(int)$_GET['del_link']); 
+header("Location: $local");
+ }
 
 // --- DATOS PARA EDICIÓN ---
 $edit_cat = null; if (isset($_GET['edit_cat'])) { $res = mysqli_query($link, "SELECT * FROM LINK_CATEGORIES WHERE category_id=".(int)$_GET['edit_cat']); $edit_cat = mysqli_fetch_assoc($res); }
@@ -68,8 +73,10 @@ $edit_link = null; if (isset($_GET['edit_link'])) { $res = mysqli_query($link, "
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gotham Metro Favs</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css" crossorigin="anonymous">
+    <!-- Bootstrap 4.6.2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome 5.15.4 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" crossorigin="anonymous">
     <style>
         body { background: #111; color: #eee; font-family: 'Segoe UI', sans-serif; padding-bottom: 80px; }
         .metro-tile { 
@@ -88,10 +95,12 @@ $edit_link = null; if (isset($_GET['edit_link'])) { $res = mysqli_query($link, "
 
 <nav class="navbar navbar-expand navbar-dark nav-metro mb-4">
     <div class="container">
-        <a class="navbar-brand fw-bold" href="index.php"><i class="fas fa-th"></i> GOTHAM FAVS</a>
-        <div class="navbar-nav ms-auto">
-            <a class="nav-link btn btn-outline-primary btn-sm me-2" href="#" data-bs-toggle="modal" data-bs-target="#modCat"> + Categoría</a>
-            <a class="nav-link btn btn-outline-success btn-sm me-2" href="#" data-bs-toggle="modal" data-bs-target="#modLink"> + Favorito</a>
+        <!-- ml-auto en lugar de ms-auto (BS4) -->
+        <a class="navbar-brand font-weight-bold" href="?"><i class="fas fa-th"></i> GOTHAM FAVS</a>
+        <div class="navbar-nav ml-auto">
+            <!-- mr-2 en lugar de me-2 (BS4) -->
+            <a class="nav-link btn btn-outline-primary btn-sm mr-2" href="#" data-toggle="modal" data-target="#modCat"> + Categoría</a>
+            <a class="nav-link btn btn-outline-success btn-sm mr-2" href="#" data-toggle="modal" data-target="#modLink"> + Favorito</a>
             <a class="nav-link text-danger" href="?logout=1"><i class="fas fa-sign-out-alt"></i></a>
         </div>
     </div>
@@ -104,27 +113,30 @@ $edit_link = null; if (isset($_GET['edit_link'])) { $res = mysqli_query($link, "
     ?>
     <div class="mb-4">
         <div class="d-flex align-items-center mb-2 border-bottom border-secondary pb-1">
-            <h5 class="m-0 text-uppercase fw-lighter"><i class="<?= $c['category_icon'] ?>"></i> <?= $c['category_name'] ?></h5>
-            <div class="ms-auto">
-                <a href="?edit_cat=<?= $c['category_id'] ?>" class="text-info me-2 small"><i class="fas fa-edit"></i></a>
+            <h5 class="m-0 text-uppercase font-weight-light"><i class="<?= $c['category_icon'] ?>"></i> <?= $c['category_name'] ?></h5>
+            <!-- ml-auto en lugar de ms-auto (BS4) -->
+            <div class="ml-auto">
+                <!-- mr-2 en lugar de me-2 (BS4) -->
+                <a href="?edit_cat=<?= $c['category_id'] ?>" class="text-info mr-2 small"><i class="fas fa-edit"></i></a>
                 <a href="?del_cat=<?= $c['category_id'] ?>" class="text-danger small" onclick="return confirm('¿Borrar categoría y sus links?')"><i class="fas fa-trash"></i></a>
             </div>
         </div>
-        <div class="row g-2">
+        <!-- g-2 no existe en BS4, se usa gutters manuales con px-1 en las columnas -->
+        <div class="row">
             <?php
             $cid = $c['category_id'];
             $links = mysqli_query($link, "SELECT * FROM LINKS WHERE category_id = $cid ORDER BY link_title ASC");
             while ($l = mysqli_fetch_assoc($links)):
             ?>
-            <div class="col-4 col-sm-3 col-md-2">
+            <div class="col-4 col-sm-3 col-md-2 px-1 mb-2">
                 <div class="metro-tile" style="background-color: <?= $c['category_color'] ?>;">
                     <a href="<?= $l['link_url'] ?>" target="_blank" class="text-white text-decoration-none text-center p-2">
                         <i class="<?= $c['category_icon'] ?> fa-2x mb-1"></i><br>
-                        <small class="d-block text-truncate fw-bold" style="max-width: 90px;"><?= $l['link_title'] ?></small>
+                        <small class="d-block text-truncate font-weight-bold" style="max-width: 90px;"><?= $l['link_title'] ?></small>
                     </a>
                     <div class="tile-actions">
-                        <a href="?edit_link=<?= $l['link_id'] ?>" class="badge bg-black text-info"><i class="fas fa-edit"></i></a>
-                        <a href="?del_link=<?= $l['link_id'] ?>" class="badge bg-black text-danger" onclick="return confirm('¿Borrar?')"><i class="fas fa-times"></i></a>
+                        <a href="?edit_link=<?= $l['link_id'] ?>" class="badge badge-dark text-info"><i class="fas fa-edit"></i></a>
+                        <a href="?del_link=<?= $l['link_id'] ?>" class="badge badge-dark text-danger" onclick="return confirm('¿Borrar?')"><i class="fas fa-times"></i></a>
                     </div>
                 </div>
             </div>
@@ -139,7 +151,7 @@ $edit_link = null; if (isset($_GET['edit_link'])) { $res = mysqli_query($link, "
         <input type="hidden" name="cat_id" value="<?= $edit_cat['category_id'] ?? '' ?>">
         <label>Nombre:</label><input type="text" name="category_name" class="form-control mb-2" value="<?= $edit_cat['category_name'] ?? '' ?>" required>
         <label>Icono (FA class):</label><input type="text" name="category_icon" class="form-control mb-2" value="<?= $edit_cat['category_icon'] ?? 'fas fa-link' ?>" placeholder="fas fa-star">
-        <label>Color (Hex o Nombre):</label><input type="color" name="category_color" class="form-control form-control-color w-100 mb-2" value="<?= $edit_cat['category_color'] ?? '#0078d7' ?>">
+        <label>Color (Hex o Nombre):</label><input type="color" name="category_color" class="form-control w-100 mb-2" value="<?= $edit_cat['category_color'] ?? '#0078d7' ?>">
     </div>
     <div class="modal-footer"><button type="submit" name="save_cat" class="btn btn-primary w-100">Guardar Categoría</button></div>
 </form></div></div>
@@ -148,7 +160,8 @@ $edit_link = null; if (isset($_GET['edit_link'])) { $res = mysqli_query($link, "
     <div class="modal-body">
         <input type="hidden" name="lid" value="<?= $edit_link['link_id'] ?? '' ?>">
         <label>Categoría:</label>
-        <select name="category_id" class="form-select mb-2">
+        <!-- form-select no existe en BS4, se usa form-control (BS4) -->
+        <select name="category_id" class="form-control mb-2">
             <?php 
             $cats_sel = mysqli_query($link, "SELECT * FROM LINK_CATEGORIES");
             while($cs = mysqli_fetch_assoc($cats_sel)) {
@@ -170,8 +183,12 @@ $edit_link = null; if (isset($_GET['edit_link'])) { $res = mysqli_query($link, "
     </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<?php if($edit_cat): ?><script>new bootstrap.Modal('#modCat').show();</script><?php endif; ?>
-<?php if($edit_link): ?><script>new bootstrap.Modal('#modLink').show();</script><?php endif; ?>
+<!-- jQuery (requerido por Bootstrap 4) -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<!-- Bootstrap 4.6.2 JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Apertura de modales con jQuery (BS4) en lugar de bootstrap.Modal() (BS5) -->
+<?php if($edit_cat): ?><script>$('#modCat').modal('show');</script><?php endif; ?>
+<?php if($edit_link): ?><script>$('#modLink').modal('show');</script><?php endif; ?>
 </body>
 </html>
